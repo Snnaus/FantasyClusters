@@ -79,11 +79,11 @@ $(document).ready(function(){
             results.data = results.data.map(function(point){
                 return {
                     NAME: point.NAME,
-                    VAL: point.VAL,
+                    VAL: Number(point.VAL)/14,
                     VALPER: Number(point.VALPER)/100
                 }
             })
-            var means = createMeans(6, results.data)
+            var means = createMeans(7, results.data)
 
             for(var i = 0; i<500; i++){
                 kCluster(results.data, means);
@@ -107,6 +107,7 @@ $(document).ready(function(){
                 data: means
             })
             renderGraph(modResults, means);
+            $('#export').text(Papa.unparse(results.data));
 
         }
     };
