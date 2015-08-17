@@ -55,15 +55,17 @@ var kCluster = function(data, means){
 /**
  * takes a number and creates means for that number
  * @param  {number} number amount of means wanted
+ * @param  {array}  an array of object related to the data
  * @return {array}  an array of mean objects based on the input number
  */
-var createMeans = function(number){
+var createMeans = function(number, data){
     var means = [];
     for(var i = 0; i<number; i++){
+        var index = Math.floor(Math.random()*data.length)-1;
         means.push({
             name: i+1,
-            x: 0,
-            y: 0
+            x: data[index].VAL,
+            y: data[index].VALPER
         });
     }
     return means;
@@ -81,9 +83,9 @@ $(document).ready(function(){
                     VALPER: Number(point.VALPER)/100
                 }
             })
-            var means = createMeans(5)
+            var means = createMeans(6, results.data)
 
-            for(var i = 0; i<30; i++){
+            for(var i = 0; i<500; i++){
                 kCluster(results.data, means);
                 //console.log(means);
             }
